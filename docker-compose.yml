@@ -19,3 +19,9 @@ services:
           PROFILE: "default"
           CONFIGSERVER_URI: "http://config-service:8888"
           CONFIGSERVER_PORT:   "8888"
+          DB_PORT: "5432"
+
+  database:
+      image: postgres:9.5
+      ports:
+        - "5432:5432"

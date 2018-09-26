@@ -20,3 +20,14 @@ services:
           PROFILE: "prod"
           CONFIGSERVER_URI: "http://config-service:8888"
           CONFIGSERVER_PORT:   "8888"
+          DB_PORT: "5432"
+
+  database:
+    extends:
+      file: ../docker-compose.yml
+      service: database
+    environment:
+      POSTGRES_USER: "postgres_prod"
+      POSTGRES_PASSWORD: "611191"
+      POSTGRES_DB: "eagle_eye_prod"
+
