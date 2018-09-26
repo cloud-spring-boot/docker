@@ -5,7 +5,7 @@ services:
         file: ../docker-compose.yml
         service: config-service
       environment:
-        ENCRYPT_KEY: "SpringBoot2018!"
+        ENCRYPT_KEY: "prod-password"
 
   hello-service:
       extends:
@@ -20,4 +20,3 @@ services:
           PROFILE: "prod"
           CONFIGSERVER_URI: "http://config-service:8888"
           CONFIGSERVER_PORT:   "8888"
-          ENCRYPT_KEY: "SpringBoot2018!"

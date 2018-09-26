@@ -5,8 +5,6 @@ services:
       image: cloud-spring-boot/config-service:1.0.0-SNAPSHOT
       ports:
         - "8888:8888"
-      environment:
-        ENCRYPT_KEY: "SpringBoot2018!"
 
   hello-service:
       image: cloud-spring-boot/hello-service:1.0.0-SNAPSHOT
@@ -21,4 +19,3 @@ services:
           PROFILE: "default"
           CONFIGSERVER_URI: "http://config-service:8888"
           CONFIGSERVER_PORT:   "8888"
-          ENCRYPT_KEY: "SpringBoot2018!"
