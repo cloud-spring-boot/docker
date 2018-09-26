@@ -18,7 +18,7 @@ services:
         ports:
           - "7070:7070"
         environment:
-          PROFILE: "dev"
+          PROFILE: "default"
           CONFIGSERVER_URI: "http://config-service:8888"
           CONFIGSERVER_PORT:   "8888"
           ENCRYPT_KEY: "SpringBoot2018!"
