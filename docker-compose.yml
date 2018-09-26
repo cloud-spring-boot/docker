@@ -1,0 +1,24 @@
+version: '2'
+services:
+
+  config-service:
+      image: cloud-spring-boot/config-service:1.0.0-SNAPSHOT
+      ports:
+        - "8888:8888"
+      environment:
+        ENCRYPT_KEY: "SpringBoot2018!"
+
+  hello-service:
+      image: cloud-spring-boot/hello-service:1.0.0-SNAPSHOT
+      ports:
+        - "6060:6060"
+
+  licensing-service:
+        image: cloud-spring-boot/licensing-service:1.0.0-SNAPSHOT
+        ports:
+          - "7070:7070"
+        environment:
+          PROFILE: "dev"
+          CONFIGSERVER_URI: "http://config-service:8888"
+          CONFIGSERVER_PORT:   "8888"
+          ENCRYPT_KEY: "SpringBoot2018!"
