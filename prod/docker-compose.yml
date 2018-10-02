@@ -30,4 +30,3 @@ services:
       POSTGRES_USER: "postgres_prod"
       POSTGRES_PASSWORD: "611191"
       POSTGRES_DB: "eagle_eye_prod"
-
