@@ -1,6 +1,11 @@
 version: '2'
 services:
 
+  eureka:
+      image: springcloud/eureka:latest
+      ports:
+        - "8761:8761"
+
   config-service:
       image: cloud-spring-boot/config-service:1.0.0-SNAPSHOT
       ports:
@@ -10,18 +15,27 @@ services:
       image: cloud-spring-boot/hello-service:1.0.0-SNAPSHOT
       ports:
         - "6060:6060"
+      environment:
+        EUREKASERVER_URI: "http://eureka:8761/eureka/"
+        EUREKASERVER_PORT: "8761"
 
   licensing-service:
-        image: cloud-spring-boot/licensing-service:1.0.0-SNAPSHOT
-        ports:
-          - "7070:7070"
-        environment:
-          PROFILE: "default"
-          CONFIGSERVER_URI: "http://config-service:8888"
-          CONFIGSERVER_PORT:   "8888"
-          DB_PORT: "5432"
+      image: cloud-spring-boot/licensing-service:1.0.0-SNAPSHOT
+      ports:
+        - "7070:7070"
+      environment:
+        PROFILE: "default"
+        CONFIGSERVER_URI: "http://config-service:8888"
+        CONFIGSERVER_PORT:   "8888"
+        DB_PORT: "5432"
+        EUREKASERVER_URI: "http://eureka:8761/eureka/"
+        EUREKASERVER_PORT: "8761"
 
   database:
       image: postgres:9.5
       ports:
         - "5432:5432"
+
+
+
+

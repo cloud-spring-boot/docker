@@ -1,26 +1,45 @@
 version: '2'
 services:
+
+  eureka:
+    extends:
+      file: ../docker-compose.yml
+      service: eureka
+
   config-service:
-      extends:
-        file: ../docker-compose.yml
-        service: config-service
-      environment:
-        ENCRYPT_KEY: "dev-password"
+    extends:
+      file: ../docker-compose.yml
+      service: config-service
+    environment:
+      ENCRYPT_KEY: "dev-password"
+      EUREKASERVER_URI: "http://eureka:8761"
+      EUREKASERVER_PORT: "8761"
 
   hello-service:
-      extends:
-        file: ../docker-compose.yml
-        service: hello-service
+    extends:
+      file: ../docker-compose.yml
+      service: hello-service
+    depends_on:
+      - eureka
+    environment:
+      EUREKASERVER_URI: "http://eureka:8761/eureka/"
+      EUREKASERVER_PORT: "8761"
 
   licensing-service:
-        extends:
-            file: ../docker-compose.yml
-            service: licensing-service
-        environment:
-          PROFILE: "dev"
-          CONFIGSERVER_URI: "http://config-service:8888"
-          CONFIGSERVER_PORT:   "8888"
-          DB_PORT: "5432"
+    extends:
+      file: ../docker-compose.yml
+      service: licensing-service
+    depends_on:
+      - eureka
+      - config-service
+      - database
+    environment:
+      PROFILE: "dev"
+      CONFIGSERVER_URI: "http://config-service:8888"
+      CONFIGSERVER_PORT:   "8888"
+      DB_PORT: "5432"
+      EUREKASERVER_URI: "http://eureka:8761/eureka/"
+      EUREKASERVER_PORT: "8761"
 
   database:
     extends:
@@ -30,3 +49,5 @@ services:
       POSTGRES_USER: "postgres_dev"
       POSTGRES_PASSWORD: "611191"
       POSTGRES_DB: "eagle_eye_dev"
+
+
