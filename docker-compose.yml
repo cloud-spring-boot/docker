@@ -2,7 +2,7 @@ version: '2'
 services:
 
   eureka:
-      image: springcloud/eureka:latest
+      image: cloud-spring-boot/eureka:1.0.0-SNAPSHOT
       ports:
         - "8761:8761"
 
