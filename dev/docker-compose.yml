@@ -10,6 +10,8 @@ services:
     extends:
       file: ../docker-compose.yml
       service: config-service
+    depends_on:
+      - eureka
     environment:
       ENCRYPT_KEY: "dev-password"
       EUREKASERVER_URI: "http://eureka:8761"
@@ -33,6 +35,7 @@ services:
       - eureka
       - config-service
       - database
+      - hello-service
     environment:
       PROFILE: "dev"
       CONFIGSERVER_URI: "http://config-service:8888"
