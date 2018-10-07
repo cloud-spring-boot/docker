@@ -17,10 +17,20 @@ services:
       EUREKASERVER_URI: "http://eureka:8761"
       EUREKASERVER_PORT: "8761"
 
-  hello-service:
+  hello-service1:
     extends:
       file: ../docker-compose.yml
-      service: hello-service
+      service: hello-service1
+    depends_on:
+      - eureka
+    environment:
+      EUREKASERVER_URI: "http://eureka:8761/eureka/"
+      EUREKASERVER_PORT: "8761"
+
+  hello-service2:
+    extends:
+      file: ../docker-compose.yml
+      service: hello-service2
     depends_on:
       - eureka
     environment:
@@ -35,7 +45,8 @@ services:
       - eureka
       - config-service
       - database
-      - hello-service
+      - hello-service1
+      - hello-service2
     environment:
       PROFILE: "prod"
       CONFIGSERVER_URI: "http://config-service:8888"
