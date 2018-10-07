@@ -14,7 +14,7 @@ services:
   hello-service:
       image: cloud-spring-boot/hello-service:1.0.0-SNAPSHOT
       ports:
-        - "6060:6060"
+        - "6060:8080"
       environment:
         EUREKASERVER_URI: "http://eureka:8761/eureka/"
         EUREKASERVER_PORT: "8761"
@@ -22,7 +22,7 @@ services:
   licensing-service:
       image: cloud-spring-boot/licensing-service:1.0.0-SNAPSHOT
       ports:
-        - "7070:7070"
+        - "7070:8080"
       environment:
         PROFILE: "default"
         CONFIGSERVER_URI: "http://config-service:8888"
