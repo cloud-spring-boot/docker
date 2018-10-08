@@ -2,34 +2,12 @@ version: '3'
 services:
 
   config-service:
-    depends_on:
-      - eureka
     environment:
       ENCRYPT_KEY: "dev-password"
       EUREKASERVER_URI: "http://eureka:8761/eureka/"
       EUREKASERVER_PORT: "8761"
 
-  hello-service1:
-    depends_on:
-      - eureka
-    environment:
-      EUREKASERVER_URI: "http://eureka:8761/eureka/"
-      EUREKASERVER_PORT: "8761"
-
-  hello-service2:
-    depends_on:
-      - eureka
-    environment:
-      EUREKASERVER_URI: "http://eureka:8761/eureka/"
-      EUREKASERVER_PORT: "8761"
-
   licensing-service:
-    depends_on:
-      - eureka
-      - config-service
-      - database
-      - hello-service1
-      - hello-service2
     environment:
       PROFILE: "dev"
       CONFIGSERVER_URI: "http://config-service:8888"
