@@ -1,15 +1,7 @@
-version: '2.1'
+version: '3'
 services:
 
-  eureka:
-    extends:
-      file: ../docker-compose.yml
-      service: eureka
-
   config-service:
-    extends:
-      file: ../docker-compose.yml
-      service: config-service
     depends_on:
       - eureka
     environment:
@@ -18,9 +10,6 @@ services:
       EUREKASERVER_PORT: "8761"
 
   hello-service1:
-    extends:
-      file: ../docker-compose.yml
-      service: hello-service1
     depends_on:
       - eureka
     environment:
@@ -28,9 +17,6 @@ services:
       EUREKASERVER_PORT: "8761"
 
   hello-service2:
-    extends:
-      file: ../docker-compose.yml
-      service: hello-service2
     depends_on:
       - eureka
     environment:
@@ -38,9 +24,6 @@ services:
       EUREKASERVER_PORT: "8761"
 
   licensing-service:
-    extends:
-      file: ../docker-compose.yml
-      service: licensing-service
     depends_on:
       - eureka
       - config-service
@@ -56,9 +39,6 @@ services:
       EUREKASERVER_PORT: "8761"
 
   database:
-    extends:
-      file: ../docker-compose.yml
-      service: database
     environment:
       POSTGRES_USER: "postgres_dev"
       POSTGRES_PASSWORD: "611191"
