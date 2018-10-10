@@ -56,6 +56,25 @@ services:
       ports:
         - "5432:5432"
 
+  organization-service1:
+      image: cloud-spring-boot/organization-service:1.0.0-SNAPSHOT
+      ports:
+        - "6062:8080"
+      depends_on:
+        - eureka
+      environment:
+        EUREKASERVER_URI: "http://eureka:8761/eureka/"
+        EUREKASERVER_PORT: "8761"
+
+  organization-service2:
+      image: cloud-spring-boot/organization-service:1.0.0-SNAPSHOT
+      ports:
+        - "6063:8080"
+      depends_on:
+        - eureka
+      environment:
+        EUREKASERVER_URI: "http://eureka:8761/eureka/"
+        EUREKASERVER_PORT: "8761"
 
 
 
