@@ -7,23 +7,27 @@ services:
         - "8761:8761"
       mem_limit: 1g
 
-  zuul:
-      image: cloud-spring-boot/zuul:1.0.0-SNAPSHOT
-      ports:
-        - "5555:5555"
-      depends_on:
-        - eureka
-      environment:
-        EUREKASERVER_URI: "http://eureka:8761/eureka/"
-        EUREKASERVER_PORT: "8761"
-      mem_limit: 1g
-
   config-service:
       image: cloud-spring-boot/config-service:1.0.0-SNAPSHOT
       ports:
         - "8888:8888"
       depends_on:
         - eureka
+      mem_limit: 1g
+
+  zuul:
+      image: cloud-spring-boot/zuul:1.0.0-SNAPSHOT
+      ports:
+        - "5555:5555"
+      depends_on:
+        - eureka
+        - config-service
+      environment:
+        EUREKASERVER_URI: "http://eureka:8761/eureka/"
+        EUREKASERVER_PORT: "8761"
+        PROFILE: "default"
+        CONFIGSERVER_URI: "http://config-service:8888"
+        CONFIGSERVER_PORT:   "8888"
       mem_limit: 1g
 
   licensing-service:
