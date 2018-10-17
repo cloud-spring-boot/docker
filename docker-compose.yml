@@ -80,8 +80,8 @@ services:
       mem_limit: 1g
       memswap_limit: 1g
 
-#  hello-service1:
-#      image: cloud-spring-boot/hello-service:1.0.0-SNAPSHOT
+#  correlation-service1:
+#      image: cloud-spring-boot/correlation-service:1.0.0-SNAPSHOT
 #      ports:
 #        - "6060:8080"
 #      depends_on:
