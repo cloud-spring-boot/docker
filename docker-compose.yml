@@ -30,6 +30,21 @@ services:
         CONFIGSERVER_PORT:   "8888"
       mem_limit: 1g
 
+  auth:
+      image: cloud-spring-boot/auth:1.0.0-SNAPSHOT
+      ports:
+        - "3333:3333"
+      depends_on:
+        - eureka
+        - config-service
+      environment:
+        EUREKASERVER_URI: "http://eureka:8761/eureka/"
+        EUREKASERVER_PORT: "8761"
+        PROFILE: "default"
+        CONFIGSERVER_URI: "http://config-service:8888"
+        CONFIGSERVER_PORT:   "8888"
+      mem_limit: 1g
+
   licensing-service:
       image: cloud-spring-boot/licensing-service:1.0.0-SNAPSHOT
       ports:
