@@ -23,6 +23,7 @@ services:
       DB_PORT: "5432"
       EUREKASERVER_URI: "http://eureka:8761/eureka/"
       EUREKASERVER_PORT: "8761"
+      AUTH_URI: "http://auth:3333/auth/user"
 
   database:
     environment:

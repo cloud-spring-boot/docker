@@ -1,2 +1,6 @@
 # MacOS specific files
 .DS_Store
+
+# tcpdump files
+pcap/**
+

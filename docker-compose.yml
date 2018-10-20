@@ -28,6 +28,8 @@ services:
         PROFILE: "default"
         CONFIGSERVER_URI: "http://config-service:8888"
         CONFIGSERVER_PORT:   "8888"
+      volumes:
+        - ./pcap:/usr/local/zuul/pcap/
       mem_limit: 1g
 
   auth:
@@ -62,6 +64,9 @@ services:
         DB_PORT: "5432"
         EUREKASERVER_URI: "http://eureka:8761/eureka/"
         EUREKASERVER_PORT: "8761"
+        AUTH_URI: "http://auth:3333/auth/user"
+      volumes:
+        - ./pcap:/usr/local/licensing-service/pcap/
       mem_limit: 2g
 
   database:
@@ -80,6 +85,9 @@ services:
       environment:
         EUREKASERVER_URI: "http://eureka:8761/eureka/"
         EUREKASERVER_PORT: "8761"
+        AUTH_URI: "http://auth:3333/auth/user"
+      volumes:
+        - ./pcap:/usr/local/organization-service/pcap/
       mem_limit: 1g
       memswap_limit: 1g
 
@@ -92,19 +100,8 @@ services:
       environment:
         EUREKASERVER_URI: "http://eureka:8761/eureka/"
         EUREKASERVER_PORT: "8761"
+        AUTH_URI: "http://auth:3333/auth/user"
+      volumes:
+        - ./pcap:/usr/local/organization-service/pcap/
       mem_limit: 1g
       memswap_limit: 1g
-
-#  correlation-service1:
-#      image: cloud-spring-boot/correlation-service:1.0.0-SNAPSHOT
-#      ports:
-#        - "6060:8080"
-#      depends_on:
-#        - eureka
-#      environment:
-#        EUREKASERVER_URI: "http://eureka:8761/eureka/"
-#        EUREKASERVER_PORT: "8761"
-#      mem_limit: 1g
-
-
-
