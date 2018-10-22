@@ -5,6 +5,8 @@ services:
       image: cloud-spring-boot/eureka:1.0.0-SNAPSHOT
       ports:
         - "8761:8761"
+      volumes:
+        - ./pcap:/usr/local/eureka/pcap/
       mem_limit: 1g
 
   config-service:
@@ -13,6 +15,8 @@ services:
         - "8888:8888"
       depends_on:
         - eureka
+      volumes:
+        - ./pcap:/usr/local/config-service/pcap
       mem_limit: 1g
 
   zuul:
