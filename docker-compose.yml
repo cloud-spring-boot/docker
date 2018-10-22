@@ -45,6 +45,8 @@ services:
         PROFILE: "default"
         CONFIGSERVER_URI: "http://config-service:8888"
         CONFIGSERVER_PORT:   "8888"
+      volumes:
+        - ./pcap:/usr/local/auth/pcap/
       mem_limit: 1g
 
   licensing-service:
