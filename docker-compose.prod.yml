@@ -38,3 +38,21 @@ services:
       POSTGRES_USER: "postgres_prod"
       POSTGRES_PASSWORD: "611191"
       POSTGRES_DB: "eagle_eye_prod"
+
+  organization-service1:
+      environment:
+        PROFILE: "prod"
+        CONFIGSERVER_URI: "http://config-service:8888"
+        CONFIGSERVER_PORT:   "8888"
+        EUREKASERVER_URI: "http://eureka:8761/eureka/"
+        EUREKASERVER_PORT: "8761"
+        AUTH_URI: "http://auth:3333/auth/user"
+
+  organization-service2:
+      environment:
+        PROFILE: "prod"
+        CONFIGSERVER_URI: "http://config-service:8888"
+        CONFIGSERVER_PORT:   "8888"
+        EUREKASERVER_URI: "http://eureka:8761/eureka/"
+        EUREKASERVER_PORT: "8761"
+        AUTH_URI: "http://auth:3333/auth/user"

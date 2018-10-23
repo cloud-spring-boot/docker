@@ -89,6 +89,9 @@ services:
       depends_on:
         - eureka
       environment:
+        PROFILE: "default"
+        CONFIGSERVER_URI: "http://config-service:8888"
+        CONFIGSERVER_PORT:   "8888"
         EUREKASERVER_URI: "http://eureka:8761/eureka/"
         EUREKASERVER_PORT: "8761"
         AUTH_URI: "http://auth:3333/auth/user"
@@ -104,6 +107,9 @@ services:
       depends_on:
         - eureka
       environment:
+        PROFILE: "default"
+        CONFIGSERVER_URI: "http://config-service:8888"
+        CONFIGSERVER_PORT:   "8888"
         EUREKASERVER_URI: "http://eureka:8761/eureka/"
         EUREKASERVER_PORT: "8761"
         AUTH_URI: "http://auth:3333/auth/user"
