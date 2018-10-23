@@ -15,6 +15,14 @@ services:
       CONFIGSERVER_URI: "http://config-service:8888"
       CONFIGSERVER_PORT:   "8888"
 
+  auth:
+      environment:
+        EUREKASERVER_URI: "http://eureka:8761/eureka/"
+        EUREKASERVER_PORT: "8761"
+        PROFILE: "dev"
+        CONFIGSERVER_URI: "http://config-service:8888"
+        CONFIGSERVER_PORT:   "8888"
+
   licensing-service:
     environment:
       PROFILE: "dev"
