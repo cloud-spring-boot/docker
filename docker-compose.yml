@@ -64,6 +64,7 @@ services:
         - redis
         - organization-service1
 #        - organization-service2
+        - kafka
       environment:
         PROFILE: "default"
         CONFIGSERVER_URI: "http://config-service:8888"
@@ -72,6 +73,9 @@ services:
         EUREKASERVER_URI: "http://eureka:8761/eureka/"
         EUREKASERVER_PORT: "8761"
         AUTH_URI: "http://auth:3333/auth/user"
+        KAFKA_SERVER_URI: "kafka"
+        ZK_SERVER_URI: "kafka"
+        KAFKA_SERVER_PORT: "2181"
       volumes:
         - ./pcap:/usr/local/licensing-service/pcap/
       mem_limit: 2g
@@ -95,6 +99,7 @@ services:
         - "6062:8080"
       depends_on:
         - eureka
+        - kafka
       environment:
         PROFILE: "default"
         CONFIGSERVER_URI: "http://config-service:8888"
