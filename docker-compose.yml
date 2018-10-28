@@ -63,7 +63,7 @@ services:
         - database
         - redis
         - organization-service1
-        - organization-service2
+#        - organization-service2
       environment:
         PROFILE: "default"
         CONFIGSERVER_URI: "http://config-service:8888"
@@ -107,20 +107,20 @@ services:
       mem_limit: 1g
       memswap_limit: 1g
 
-  organization-service2:
-      image: cloud-spring-boot/organization-service:1.0.0-SNAPSHOT
-      ports:
-        - "6063:8080"
-      depends_on:
-        - eureka
-      environment:
-        PROFILE: "default"
-        CONFIGSERVER_URI: "http://config-service:8888"
-        CONFIGSERVER_PORT:   "8888"
-        EUREKASERVER_URI: "http://eureka:8761/eureka/"
-        EUREKASERVER_PORT: "8761"
-        AUTH_URI: "http://auth:3333/auth/user"
-      volumes:
-        - ./pcap:/usr/local/organization-service/pcap/
-      mem_limit: 1g
-      memswap_limit: 1g
+#  organization-service2:
+#      image: cloud-spring-boot/organization-service:1.0.0-SNAPSHOT
+#      ports:
+#        - "6063:8080"
+#      depends_on:
+#        - eureka
+#      environment:
+#        PROFILE: "default"
+#        CONFIGSERVER_URI: "http://config-service:8888"
+#        CONFIGSERVER_PORT:   "8888"
+#        EUREKASERVER_URI: "http://eureka:8761/eureka/"
+#        EUREKASERVER_PORT: "8761"
+#        AUTH_URI: "http://auth:3333/auth/user"
+#      volumes:
+#        - ./pcap:/usr/local/organization-service/pcap/
+#      mem_limit: 1g
+#      memswap_limit: 1g
