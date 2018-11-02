@@ -1,6 +1,18 @@
 version: '2.1'
 services:
 
+  zipkin:
+    image: cloud-spring-boot/zipkin:1.0.0-SNAPSHOT
+    ports:
+      - "9411:9411"
+    environment:
+      PROFILE: "default"
+      CONFIGSERVER_URI: "http://config-service:8888"
+      CONFIGSERVER_PORT: "8888"
+    volumes:
+      - ./pcap:/usr/local/zipkin/pcap/
+    mem_limit: 1g
+
   eureka:
       image: cloud-spring-boot/eureka:1.0.0-SNAPSHOT
       ports:
@@ -32,6 +44,7 @@ services:
         PROFILE: "default"
         CONFIGSERVER_URI: "http://config-service:8888"
         CONFIGSERVER_PORT:   "8888"
+        ZIPKIN_SERVER_URI: "http://zipkin:9411"
       volumes:
         - ./pcap:/usr/local/zuul/pcap/
       mem_limit: 1g
@@ -76,6 +89,7 @@ services:
         KAFKA_SERVER_URI: "kafka"
         ZK_SERVER_URI: "kafka"
         KAFKA_SERVER_PORT: "2181"
+        ZIPKIN_SERVER_URI: "http://zipkin:9411"
       volumes:
         - ./pcap:/usr/local/licensing-service/pcap/
       mem_limit: 2g
@@ -110,6 +124,7 @@ services:
         KAFKA_SERVER_URI: "kafka"
         ZK_SERVER_URI: "kafka"
         KAFKA_SERVER_PORT: "2181"
+        ZIPKIN_SERVER_URI: "http://zipkin:9411"
       volumes:
         - ./pcap:/usr/local/organization-service/pcap/
       mem_limit: 1g
