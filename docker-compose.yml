@@ -1,6 +1,13 @@
 version: '2.1'
 services:
 
+  # https://papertrailapp.com/groups/11730952/events
+  logspout:
+    image: gliderlabs/logspout
+    command: syslog://logs7.papertrailapp.com:27843
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
   zipkin:
     image: cloud-spring-boot/zipkin:1.0.0-SNAPSHOT
     ports:
