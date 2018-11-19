@@ -2,11 +2,24 @@ version: '2.1'
 services:
 
   # https://papertrailapp.com/groups/11730952/events
-  logspout:
-    image: gliderlabs/logspout
-    command: syslog://logs7.papertrailapp.com:27843
+#  logspout:
+#    image: gliderlabs/logspout
+#    command: syslog://logs7.papertrailapp.com:27843
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+
+  # See https://github.com/google/cadvisor for more details.
+  cadvisor:
+    image: google/cadvisor:latest
+    ports:
+      - "3030:8080"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    mem_limit: 128m
 
   zipkin:
     image: cloud-spring-boot/zipkin:1.0.0-SNAPSHOT
@@ -77,6 +90,10 @@ services:
       image: cloud-spring-boot/licensing-service:1.0.0-SNAPSHOT
       ports:
         - "7070:8080"
+
+      # this privileged mode requires for async-profiler
+      privileged: true
+
       depends_on:
         - eureka
         - config-service
