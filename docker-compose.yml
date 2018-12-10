@@ -1,4 +1,4 @@
-version: '2.1'
+version: '2.2'
 services:
 
   # https://papertrailapp.com/groups/11730952/events
@@ -151,6 +151,7 @@ services:
         ZIPKIN_SERVER_URI: "http://zipkin:9411"
       volumes:
         - ./pcap:/usr/local/organization-service/pcap/
+      cpuset: 0,1
       mem_limit: 1g
       memswap_limit: 1g
 
